@@ -90,34 +90,42 @@ function renderButtons() {
   // Iteration 3: add/remove the class "active" of each `<button class="btn">`
   const btnArr = document.querySelectorAll('.btn')
   let count = 0
-
-  for(const i in state){
-    if(state[i] === true){
-      btnArr[i].classList.add('active')
+  for(prop in state){
+    if(state[prop] === true){
+      //console.log(`state.${prop}=${state[prop]}`)
+      btnArr[count].classList.add('active')
       count++
     }else{
-      btnArr[i].classList.remove('active')
+      btnArr[count].classList.remove('active')
       count++
     }
       //  let buttons = document.querySelectorAll('.btn');
-}}
+  }}
 
 function renderPrice() {
   // Iteration 4: change the HTML of `<aside class="panel price">`
   let totalPrice = basePrice;
   let items = '';
-
-  for (i in state) {
-    if (state[i]) {
-      totalPrice += ingredients[i].price;
-      items += `<li>$${ingredients[i].price} ${ingredients[i].name}</li>`
+  let count =0
+  const panelPrice = document.querySelectorAll('.price li')
+  for (prop in state) {
+    if (state[prop] ===true) {
+      totalPrice += ingredients[prop].price;
+      //items += `<li>$${ingredients[prop].price} ${ingredients[prop].name}</li>` //opcion1
+    //panelPrice[count].style.display ='block'
+    panelPrice[count].hidden =false
     }
+    else{
+    //panelPrice[count].style.display ='none'
+    panelPrice[count].hidden= true
+    }
+    count++
   }
   let totalSum = document.querySelector('.price strong')
   totalSum.innerHTML = `$${totalPrice}`
 
-  let panel = document.querySelector('.price ul')
-  panel.innerHTML = items
+  //let panel = document.querySelector('.price ul') //opcion1
+  //panel.innerHTML = items //opcion1
 
 }
 
